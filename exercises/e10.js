@@ -1,17 +1,33 @@
 export const getFirstResolvedPromise = (promises) => {
   //*  write code to pass test ⬇ ️
+  return new Promise((resolve, reject) => {
+    promises.forEach((promise) => {
+      promise.then(resolve).catch(() => {});
+    });
+  });
 };
 
 export const getFirstPromiseOrFail = (promises) => {
   //*  write code to pass test ⬇ ️
+ return Promise.any(promises).catch(() => {
+    throw new Error('No promises resolved');
+  });
 };
+// I had an issue with this one i can't figure it out without making it worse!
+//error says: it should reject when encountering a failure before resolving
 
 export const getQuantityOfRejectedPromises = (promises) => {
   //*  write code to pass test ⬇ ️
+  return Promise.allSettled(promises).then((results) =>
+     results.filter((result) => result.status === 'rejected').length
+   );
 };
 
 export const getQuantityOfFulfilledPromises = (promises) => {
   //*  write code to pass test ⬇ ️
+  return Promise.allSettled(promises).then((results) =>
+     results.filter((result) => result.status === 'fulfilled').length
+   );
 };
 
 //!  ⬇ ⬇ ⬇ ⬇ Don't Edit This Array ⬇ ⬇ ⬇ ⬇
@@ -45,4 +61,11 @@ export const fetchAllCharactersByIds = async (ids) => {
   // To solve this you must fetch all characters passed in the array at the same time
   // use the `fetchCharacterById` function above to make this work
   //*  write code to pass test ⬇ ️
+  try {
+    const characters = await Promise.all(ids.map((id) => fetchCharacterById(id)));
+    return characters.filter(Boolean); 
+  } catch (error) {
+    console.error(error);
+    return []; 
+  }
 };

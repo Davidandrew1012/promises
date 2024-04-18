@@ -11,10 +11,10 @@
  * The function must be exported
  */
 
-export function iterate(arg) {
+export function iterate(i) {
   // Your code goes here...
-  console.log(arg);
-  return arg + 1;
+  console.log(i);
+  return i += 1;
   
 }
 
@@ -26,7 +26,7 @@ export function iterate(arg) {
 
 export function alwaysThrows() {
   // Your code goes here...
-  throw new Error("OH NOES")
+  throw Error("OH NOES")
 }
 
 /**
@@ -38,12 +38,11 @@ export function alwaysThrows() {
  * The function must be exported
  */
 
-export function onReject() {
-  // Your code goes here...
-  if(typeof arg === 'object' && arg !== null && arg.message) {
-    console.log(arg.message); 
+export function onReject(err) {
+  if (typeof err === 'object'){
+    console.log(err.message)
   } else {
-    console.log(arg);
+    console.log(err)
   }
 }
 
@@ -71,16 +70,16 @@ export function onReject() {
 // Your code goes here...
 export const promise = Promise.resolve()
   .then(() => iterate(1))
-  .then(() => iterate(2))
-  .then(() => iterate(3))
-  .then(() => iterate(4))
-  .then(() => iterate(5))
-  .then(() => alwaysThrows()) // Call alwaysThrows after the 5th iteration
-  .then(() => iterate(6))
-  .then(() => iterate(7))
-  .then(() => iterate(8))
-  .then(() => iterate(9))
-  .then(() => iterate(10))
+  .then(() => iterate(i))
+  .then(() => iterate(i))
+  .then(() => iterate(i))
+  .then(() => iterate(i))
+  .then(alwaysThrows) // Call alwaysThrows after the 5th iteration
+  .then(() => iterate(i))
+  .then(() => iterate(i))
+  .then(() => iterate(i))
+  .then(() => iterate(i))
+  .then(() => iterate(i))
   .catch((error) => onReject(error)); // Attach a rejection handler
 
 
