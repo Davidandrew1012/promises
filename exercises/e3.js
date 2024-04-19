@@ -15,12 +15,12 @@
  * Example: export const getPromise(num) => return <Your code of promise>
  */
 export const getPromise = (arg) => {
-  if (typeof arg === 'string' || !Number.isInteger(arg)) {
-    return 0;
-  } else {
+  if (Number.isInteger(arg)) {
     return new Promise((resolve, reject) => {
       resolve(arg);
     });
+  } else {
+    return 0;
   }
 };
 
