@@ -13,17 +13,7 @@ export const createOneSecondPromise = () => {
   });
 };
 
-const onFulfilled = (data) => {
-  console.log(data);
-}
 
-const onRejected = (reason) => {
-  console.error(reason);
-}
-
-createOneSecondPromise()
-  .then(onFulfilled)
-  .catch(onRejected)
 
 export const logMessageAfterOneSecond = (message) => {
   // use the 'createOneSecondPromise' function, and a `onFulfilled` callback with a `.then` method
@@ -31,9 +21,6 @@ export const logMessageAfterOneSecond = (message) => {
   createOneSecondPromise()
   .then(() => {
     console.log(message);
-  })
-  .catch((error) => {
-    console.error('Error Occured: ', error);
   });
 };
 
@@ -42,13 +29,12 @@ export const logMessageAfterOneSecondAwait = async (message) => {
   // to create a function that logs a message after one second
   // in an async function it automatically returns a promise no matter what you return, so you don't need to
   // worry about what you return
-  createOneSecondPromise()
-  .then(() => {
+  try {
+    await createOneSecondPromise();
     console.log(message);
-  })
-  .catch((error) => {
+  } catch (error) {
     console.log('Error occurred:', error);
-  });
+  }
 };
 
 // === TEST YOURSELF ===
