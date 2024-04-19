@@ -21,7 +21,7 @@ export const getPromise = (bool) => {
     if (bool) {
       resolve("The PROMISE was RESOLVED")
     } else {
-      resolve("The PROMISE was REJECTED")
+      reject("The PROMISE was REJECTED")
     }
   });
 };
