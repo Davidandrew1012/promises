@@ -57,6 +57,7 @@ export const result = getData
   .then((response) => response.json())
   .then((data) => {
     const logins = getLoginList(data);
+    console.log(logins);
     return logins;
   })
   .catch((error) => console.error("Error fetching data:", error));
