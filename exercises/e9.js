@@ -3,19 +3,17 @@
  * Please, make sure to read the "09 An-important-rule.md" file in exercises-info folder
  */
 
-
 /**
  * @task
- * Create a function `iterate` that prints the first function argument 
+ * Create a function `iterate` that prints the first function argument
  * (an integer) to it and then returns that argument + 1
  * The function must be exported
  */
 
-export function iterate(i) {
+export function iterate(int) {
   // Your code goes here...
-  console.log(i);
-  return i += 1;
-  
+  console.log(int);
+  return (int += 1);
 }
 
 /**
@@ -26,12 +24,12 @@ export function iterate(i) {
 
 export function alwaysThrows() {
   // Your code goes here...
-  throw Error("OH NOES")
+  throw Error("OH NOES");
 }
 
 /**
  * @task
- * Create a function `onReject` that 
+ * Create a function `onReject` that
  * * Takes an argument that can be either error object or a string value
  * * Logs the error object message property value in the console if the argument is an object
  * * Logs the argument value in the console in any other case
@@ -39,13 +37,18 @@ export function alwaysThrows() {
  */
 
 export function onReject(err) {
-  if (typeof err === 'object'){
-    console.log(err.message)
-  } else {
-    console.log(err)
-  }
+  const valueToLog = err.message ?? err;
+  console.log(valueToLog);
 }
 
+// export function onReject(err) {
+//   const valueToLog = err.message ?? err
+//   if (err.message){
+//     console.log(err.message)
+//   } else {
+//     console.log(err)
+//   }
+// }
 /**
  * @task
  * Create a promise variable that follows the list:
@@ -68,21 +71,32 @@ export function onReject(err) {
  */
 
 // Your code goes here...
-export const promise = Promise.resolve()
-  .then(() => iterate(1))
-  .then(() => iterate(i))
-  .then(() => iterate(i))
-  .then(() => iterate(i))
-  .then(() => iterate(i))
-  .then(alwaysThrows) // Call alwaysThrows after the 5th iteration
-  .then(() => iterate(i))
-  .then(() => iterate(i))
-  .then(() => iterate(i))
-  .then(() => iterate(i))
-  .then(() => iterate(i))
-  .catch((error) => onReject(error)); // Attach a rejection handler
 
+export const promise = Promise.resolve(iterate(1))
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .then(alwaysThrows)
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .catch(onReject);
 
+// export const promise = Promise.resolve(iterate(1))
+//   .then((i) => iterate(i))
+//   .then((i) => iterate(i))
+//   .then((i) => iterate(i))
+//   .then((i) => iterate(i))
+//   .then(alwaysThrows) // Call alwaysThrows after the 5th iteration
+//   .then((i) => iterate(i))
+//   .then((i) => iterate(i))
+//   .then((i) => iterate(i))
+//   .then((i) => iterate(i))
+//   .then((i) => iterate(i))
+//   .catch((error) => onReject(error)); // Attach a rejection handler
 
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-9"

@@ -24,9 +24,9 @@ export function parsePromised(arg) {
     try {
       resolve(JSON.parse(arg));
     } catch (error) {
-      reject(error)
+      reject(error);
     }
-  })
+  });
 }
 
 /**
@@ -54,18 +54,23 @@ export function onReject(error) {
 
 export const handlePromise = (promise) => {
   return promise
-  .then((data) => { return parsePromised(data) })
-  .catch((error) => {
-    if (error.message !== undefined) {
-      return onReject(error);
-    } else {
-      return console.log(error);
-    }
-  })
+    .then((data) => data)
+    .catch((error) => {
+      return error.message ? onReject(error) : error;
+    });
 };
 
-// I cant figure this out!!!! =(
-
+// export const handlePromise = (promise) => {
+//   return promise
+//     .then((data) => data)
+//     .catch((error) => {
+//       if (error.message) {
+//         return onReject(error);
+//       } else {
+//         return error;
+//       }
+//     });
+// };
 
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-7"

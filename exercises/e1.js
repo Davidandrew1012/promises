@@ -6,7 +6,7 @@
 export const createOneSecondPromise = () => {
   // Return a Promise that resolves to the string 'The PROMISE was RESOLVED' in 1 second
   // make sure to use the promise constructor described in The Markdown For this exercise
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     setTimeout(() => {
       resolve('The PROMISE was RESOLVED')
     }, 1000);
@@ -29,12 +29,8 @@ export const logMessageAfterOneSecondAwait = async (message) => {
   // to create a function that logs a message after one second
   // in an async function it automatically returns a promise no matter what you return, so you don't need to
   // worry about what you return
-  try {
-    await createOneSecondPromise();
-    console.log(message);
-  } catch (error) {
-    console.log('Error occurred:', error);
-  }
+   await createOneSecondPromise();
+   console.log(message);
 };
 
 // === TEST YOURSELF ===

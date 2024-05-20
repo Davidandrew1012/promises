@@ -16,7 +16,7 @@
  */
 export const getPromise = (arg) => {
   if (Number.isInteger(arg)) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       resolve(arg);
     });
   } else {
